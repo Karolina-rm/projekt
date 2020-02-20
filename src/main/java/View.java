@@ -114,7 +114,11 @@ public class View {
             public void handle(ActionEvent event) {
                 if(choosenShip != null) {
                     GameViewManager gameManager = new GameViewManager();
-                    gameManager.createNewGame(stage, choosenShip);
+                    try {
+                        gameManager.createNewGame(stage, choosenShip);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });
@@ -149,6 +153,7 @@ public class View {
 
     public void createButtons() throws FileNotFoundException {
         createButtonStart();
+        createButtonContinue();
         createButtonHelp();
         createButtonRanking();
         createButtonExit();
@@ -162,6 +167,18 @@ public class View {
             @Override
             public void handle(ActionEvent event) {
                 showSubscene(shipPickerSubScene);
+            }
+        });
+    }
+
+    public void createButtonContinue() throws FileNotFoundException {
+        SpaceButton continueButton = new SpaceButton("Continue");
+        addMenu(continueButton);
+
+        continueButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+
             }
         });
     }
