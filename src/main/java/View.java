@@ -61,13 +61,14 @@ public class View {
     }
 
     private void createSubScenes() throws FileNotFoundException {
-        helpSubScene = new SpaceSubscene();
-        pane.getChildren().add(helpSubScene);
+        /*helpSubScene = new SpaceSubscene();
+        pane.getChildren().add(helpSubScene);*/
 
         rankingSubScene = new SpaceSubscene();
         pane.getChildren().add(rankingSubScene);
 
         createShipPickerSubscene();
+        createHelpSubscene();
 
     }
 
@@ -81,6 +82,27 @@ public class View {
         shipPickerSubScene.getPane().getChildren().add(chooseShipLabel);
         shipPickerSubScene.getPane().getChildren().add(createShips());
         shipPickerSubScene.getPane().getChildren().add(createButtonPlay());
+    }
+
+    private void createHelpSubscene() {
+        helpSubScene = new SpaceSubscene();
+        pane.getChildren().add(helpSubScene);
+        Text t = new Text();
+        t.setText("How to play?");
+        t.setFont(Font.font("Verdana", 20));
+        t.setLayoutX(240);
+        t.setLayoutY(50);
+        Text t1 = new Text();
+        t1.setText("If you want to start a game you have to press" + "\n" +"Start button, then choose your ship" + "\n" + "and press Play." + "\n" + "\n"+
+        "If you want to move your ship" + "\n" + "use left and right arrow keys." + "\n" + "\n" +
+                "If you want to save a game press down arrow key.");
+        t1.setFont(Font.font("Verdana", 20));
+        t1.setLayoutX(40);
+        t1.setLayoutY(120);
+        helpSubScene.getPane().getChildren().add(t);
+        helpSubScene.getPane().getChildren().add(t1);
+
+
     }
 
     private HBox createShips() {
@@ -200,6 +222,7 @@ public class View {
             @Override
             public void handle(ActionEvent event) {
                 showSubscene(helpSubScene);
+
             }
         });
     }
