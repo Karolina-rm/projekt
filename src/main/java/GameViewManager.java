@@ -17,7 +17,7 @@ public class GameViewManager {
 
     private AnchorPane gamePane;
     private Scene gameScene;
-    private Stage gameStage;
+    public Stage gameStage;
 
     private static final int GAME_WIDTH =600;
     private static final int GAME_HEIGHT = 800;
@@ -53,8 +53,9 @@ public class GameViewManager {
     private final static int SHIP_RADIUS = 27;
     private final static int METEOR_RADIUS = 20;
 
-    File savedHashMaps = new File("Ranking.list");
-    Map<String, Long> map = new HashMap<>();
+    File savedHashMaps = new File("SavedGame.list");
+    Map<Points, Integer> map = new HashMap<>();
+    Map<ImageView[], Integer> map1 = new HashMap<>();
 
 
     public GameViewManager() {
@@ -63,7 +64,7 @@ public class GameViewManager {
         randomPositionGenerator = new Random();
     }
 
-    private void initializeStage() {
+    public void initializeStage() {
         gamePane = new AnchorPane();
         gameScene = new Scene(gamePane, GAME_WIDTH, GAME_HEIGHT);
         gameStage = new Stage();
@@ -253,24 +254,43 @@ public class GameViewManager {
             }
         }
 
-        private void savingGame() {
-            if (saveGame) {
-                try {
-                    BufferedWriter bw = new BufferedWriter(new FileWriter("SavedGame.txt"));
-                    bw.write("" + points);
-                    bw.newLine();
-                    bw.write("" + life);
-                    bw.close();
+    private void savingGame() {
+        if (saveGame) {
+            try {
+                BufferedWriter bw = new BufferedWriter(new FileWriter("SavedGame.txt"));
+                bw.write("" + points);
+                bw.newLine();
+                bw.write("" + life);
+                bw.close();
 
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-
-                gameStage.close();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
 
+
+            gameStage.close();
+            menuStage.show();
         }
+
+    }
+
+    public void loadData() throws FileNotFoundException {
+
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("SavedGame.txt"));
+            points = Integer.parseInt(br.readLine());
+            life = Integer.parseInt(br.readLine());
+
+            br.close();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        createNewGame(menuStage, SHIP.BLUE);
+    }
 
 
         private void createBackground() {

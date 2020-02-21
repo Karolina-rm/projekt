@@ -1,4 +1,7 @@
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -85,21 +88,22 @@ public class View {
         HBox box = new HBox();
         box.setSpacing(20);
         shipList = new ArrayList<>();
-        for(SHIP ship : SHIP.values()) {
+        for (SHIP ship : SHIP.values()) {
             ShipPicker shipToPick = new ShipPicker(ship);
             shipList.add(shipToPick);
             box.getChildren().add(shipToPick);
             shipToPick.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    for(ShipPicker ship : shipList) {
-                        ship.setIsCircle(false);}
+                    for (ShipPicker ship : shipList) {
+                        ship.setIsCircle(false);
+                    }
                     shipToPick.setIsCircle(true);
                     choosenShip = shipToPick.getShip();
                 }
             });
         }
-        box.setLayoutX(300 - (118*2));
+        box.setLayoutX(300 - (118 * 2));
         box.setLayoutY(100);
         return box;
     }
@@ -112,7 +116,7 @@ public class View {
         playButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if(choosenShip != null) {
+                if (choosenShip != null) {
                     GameViewManager gameManager = new GameViewManager();
                     try {
                         gameManager.createNewGame(stage, choosenShip);
@@ -127,9 +131,8 @@ public class View {
     }
 
 
-
     private void showSubscene(SpaceSubscene subScene) {
-        if(sceneToHide != null) {
+        if (sceneToHide != null) {
             sceneToHide.moveSpaceSubscene();
         }
 
@@ -155,7 +158,7 @@ public class View {
         createButtonStart();
         createButtonContinue();
         createButtonHelp();
-        createButtonRanking();
+        /*createButtonRanking();*/
         createButtonExit();
     }
 
@@ -178,6 +181,12 @@ public class View {
         continueButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+            GameViewManager gm = new GameViewManager();
+                try {
+                    gm.loadData();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
 
             }
         });
@@ -195,7 +204,7 @@ public class View {
         });
     }
 
-    public void createButtonRanking() throws FileNotFoundException {
+    /*public void createButtonRanking() throws FileNotFoundException {
         SpaceButton rankingButton = new SpaceButton("Ranking");
         addMenu(rankingButton);
 
@@ -205,7 +214,7 @@ public class View {
                 showSubscene(rankingSubScene);
             }
         });
-    }
+    }*/
 
     public void createButtonExit() throws FileNotFoundException {
         SpaceButton exitButton = new SpaceButton("Exit");
@@ -259,3 +268,4 @@ public class View {
         pane.getChildren().add(logo);
     }
 }
+
