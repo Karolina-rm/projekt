@@ -1,10 +1,5 @@
-import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -13,7 +8,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -53,17 +47,10 @@ public class View {
         createButtons();
         createBackgroundScene();
         createLogo();
-        /*SpaceSubscene subScene = new SpaceSubscene();
-        subScene.setLayoutX(100);
-        subScene.setLayoutY(100);
-        pane.getChildren().add(subScene);*/
 
     }
 
     private void createSubScenes() throws FileNotFoundException {
-        /*helpSubScene = new SpaceSubscene();
-        pane.getChildren().add(helpSubScene);*/
-
         rankingSubScene = new SpaceSubscene();
         pane.getChildren().add(rankingSubScene);
 
@@ -130,14 +117,12 @@ public class View {
         return box;
     }
 
-    private SpaceButton createButtonPlay() throws FileNotFoundException {
+    private SpaceButton createButtonPlay(){
         SpaceButton playButton = new SpaceButton("PLAY");
         playButton.setLayoutX(350);
         playButton.setLayoutY(300);
 
-        playButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
+        playButton.setOnAction(event -> {
                 if (choosenShip != null) {
                     GameViewManager gameManager = new GameViewManager();
                     try {
@@ -146,7 +131,7 @@ public class View {
                         e.printStackTrace();
                     }
                 }
-            }
+
         });
 
         return playButton;
@@ -180,11 +165,10 @@ public class View {
         createButtonStart();
         createButtonContinue();
         createButtonHelp();
-        /*createButtonRanking();*/
         createButtonExit();
     }
 
-    public void createButtonStart() throws FileNotFoundException {
+    public void createButtonStart() {
         SpaceButton startButton = new SpaceButton("Start!");
         addMenu(startButton);
 
@@ -196,7 +180,7 @@ public class View {
         });
     }
 
-    public void createButtonContinue() throws FileNotFoundException {
+    public void createButtonContinue() {
         SpaceButton continueButton = new SpaceButton("Continue");
         addMenu(continueButton);
 
@@ -214,7 +198,7 @@ public class View {
         });
     }
 
-    public void createButtonHelp() throws FileNotFoundException {
+    public void createButtonHelp(){
         SpaceButton helpButton = new SpaceButton("Help");
         addMenu(helpButton);
 
@@ -227,19 +211,7 @@ public class View {
         });
     }
 
-    /*public void createButtonRanking() throws FileNotFoundException {
-        SpaceButton rankingButton = new SpaceButton("Ranking");
-        addMenu(rankingButton);
-
-        rankingButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                showSubscene(rankingSubScene);
-            }
-        });
-    }*/
-
-    public void createButtonExit() throws FileNotFoundException {
+    public void createButtonExit(){
         SpaceButton exitButton = new SpaceButton("Exit");
         addMenu(exitButton);
 
@@ -251,14 +223,6 @@ public class View {
         });
     }
 
-
-
-
-        /*SpaceButton button = new SpaceButton("Click!");
-        pane.getChildren().add(button);
-        button.setLayoutX(200);
-        button.setLayoutY(200); */
-
     private void createBackgroundScene() {
         Image image = new Image("stars.jpg", 256, 256, false, true);
         BackgroundImage background = new BackgroundImage(image, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, null);
@@ -266,10 +230,6 @@ public class View {
     }
 
     private void createLogo() {
-        /*Text t = new Text();
-        t.setText("SPACE RUNNER");
-        t.setFont((Font.loadFont(getClass().getResourceAsStream("kenvector_future.ttf"), 23)));
-        t.setFill(Color.DARKBLUE);*/
         ImageView logo = new ImageView("logo1.png");
         logo.setLayoutX(200);
         logo.setLayoutY(0);

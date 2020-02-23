@@ -30,9 +30,6 @@ public class ShipPicker extends VBox {
         return ship;
     }
 
-    public boolean getIsCircle() {
-        return isCircle;
-    }
 
     public void setIsCircle(boolean isCircle) {
         this.isCircle = isCircle;

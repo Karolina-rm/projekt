@@ -1,16 +1,12 @@
 import javafx.animation.AnimationTimer;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
 public class GameViewManager {
@@ -40,7 +36,7 @@ public class GameViewManager {
 
     private ImageView[] brownMeteors;
     private ImageView[] greyMeteors;
-    Random randomPositionGenerator;
+    private Random randomPositionGenerator;
 
     private ImageView star;
     private Points pointsBox;
@@ -52,10 +48,6 @@ public class GameViewManager {
     private final static int STAR_RADIUS = 12;
     private final static int SHIP_RADIUS = 27;
     private final static int METEOR_RADIUS = 20;
-
-    File savedHashMaps = new File("SavedGame.list");
-    Map<Points, Integer> map = new HashMap<>();
-    Map<ImageView[], Integer> map1 = new HashMap<>();
 
 
     public GameViewManager() {
@@ -72,26 +64,19 @@ public class GameViewManager {
     }
 
     private void createListeners() {
-        gameScene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                if (event.getCode() == KeyCode.LEFT) {
-                    isLeftKeyPressed = true;
+        gameScene.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.LEFT) {
+                isLeftKeyPressed = true;
 
-                } else if (event.getCode() == KeyCode.RIGHT) {
-                    isRightKeyPressed = true;
-                }
+            } else if (event.getCode() == KeyCode.RIGHT) {
+                isRightKeyPressed = true;
 
-                else if (event.getCode() == KeyCode.DOWN) {
-                    saveGame = true;
-                }
+            } else if (event.getCode() == KeyCode.DOWN) {
+                saveGame = true;
             }
-
         });
 
-        gameScene.setOnKeyReleased(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
+        gameScene.setOnKeyReleased(event-> {
                 if(event.getCode() == KeyCode.LEFT) {
                     isLeftKeyPressed = false;
                 } else if (event.getCode() == KeyCode.RIGHT) {
@@ -99,8 +84,6 @@ public class GameViewManager {
                 } else if (event.getCode() == KeyCode.DOWN) {
                     saveGame = false;
                 }
-            }
-
 
         });
     }

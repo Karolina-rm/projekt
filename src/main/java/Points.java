@@ -8,16 +8,10 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.text.Font;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 
 public class Points extends Label {
 
-    private final static String FONT_PATH = "kenvector_future.ttf";
-
-    public Points(String text) throws FileNotFoundException {
-        /*setPrefHeight(130);
-        setPrefWidth(50);*/
+    public Points(String text){
         BackgroundImage backgroundImage = new BackgroundImage(new Image("blue_button13.png", 130, 50, false, true), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, null);
         setBackground(new Background(backgroundImage));
         setAlignment(Pos.CENTER_LEFT);
@@ -27,13 +21,9 @@ public class Points extends Label {
 
     }
 
-    private void setFont() throws FileNotFoundException {
+    private void setFont(){
 
-        try {
-            setFont(Font.loadFont(new FileInputStream(FONT_PATH), 15));
-        } catch (FileNotFoundException e) {
-
-            setFont(Font.font("Verdana", 15));
+        setFont(Font.font("Verdana", 15));
         }
     }
-}
+
